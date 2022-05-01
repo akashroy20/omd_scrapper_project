@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <title>Medbazaar Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <br>
+            <h1 style="text-align: center"><i>Search Your Medicine</i></h1><br>
+            <h4 style="text-align: center">Get your medicine faster and cheaper by comparing price and delivery date
+                from different sites.</h4>  <br>
+
+             <div class="form">
+                 <form action="/result" method="POST">
+                     <div class="mb-3">
+                        <label for="requiredmedicine" class="form-label">Enter required medicine:</label>
+                        <input type="text" class="form-control" id="requiredmedicine" name="requiredmedicine">
+                     </div>
+                      <div class="mb-3">
+                        <label for="pinc" class="form-label">Enter your pincode:</label>
+                        <input type="text" class="form-control" id="pinc" name="pinc">
+                        <br>
+                      </div>
+
+                        <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
