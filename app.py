@@ -2,12 +2,19 @@ from flask import Flask, jsonify, request, render_template
 from RepositoryForObject import ObjectRepository
 from Scrapper import Scrapper
 from Pincode import Pincode
-import threading
+from selenium import webdriver
+import os
 
 app = Flask(__name__)
 
 obj = ObjectRepository()
 driver_path = obj.getDriverPath()
+op = webdriver.ChromeOptions()
+op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+op.add_argument("--headless")
+op.add_argument("--no-sandbox")
+op.add_argument("--disable-dev-sh-usage")
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=op)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -50,13 +57,7 @@ def via_postman():
             dict["Searched Product"] = required_product
             if pc.pincode_check():
                 dict["Pincode"] = pc.corresponding_pincode()
-                p = Scrapper(executable_path=driver_path)
-                # t1 = threading.Thread(target=p.pharmeasy_result(product=required_product, pincode=delivery_pincode))
-                # t2 = threading.Thread(target=p.netmeds_result(product=required_product, pincode=delivery_pincode))
-                # t1.start()
-                # t2.start()
-                # t1.join()
-                # t2.join()
+                p = Scrapper(executable_path=driver)
                 pharmeasy = p.pharmeasy_result(product=required_product, pincode=pc.corresponding_pincode())
                 netmeds = p.netmeds_result(product=required_product, pincode=pc.corresponding_pincode())
                 dict["pharmeasy"] = pharmeasy
