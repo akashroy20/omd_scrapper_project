@@ -133,7 +133,8 @@ class Scrapper:
                 product_price = self.divText(pname=locator.pharmeasy_price(), page_source=product_page_source)
                 product_delivery = self.pharmeasy_delivery(d=locator.pharmeasy_delivery(),
                                                            page_source=product_page_source)
-                product_composition = self.divText(pname=locator.pharmeasy_composition(),page_source=product_page_source)
+                product_composition = self.pharmeasyComposition(pname=locator.pharmeasy_composition(),
+                                                                page_source=product_page_source)
                 product_expiry = self.pharmeasy_expiry(e=locator.pharmeasy_expiry(),
                                                        page_source=product_page_source)
                 if product.lower() in product_name.lower():
@@ -194,6 +195,14 @@ class Scrapper:
         if page_source.find_all("div", {"class": pname}):
             obj = page_source.find_all("div", {"class": pname})
             Obj = obj[0].text
+        else:
+            Obj = "Details not found !!"
+        return Obj
+
+    def pharmeasyComposition(self, pname, page_source):
+        if page_source.find_all("td", {"class": pname}):
+            obj = page_source.find_all("td", {"class": pname})
+            Obj = obj[3].text
         else:
             Obj = "Details not found !!"
         return Obj

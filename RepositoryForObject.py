@@ -11,7 +11,7 @@ class ObjectRepository:
         return "https://pharmeasy.in/online-medicine-order?src=homecard"
 
     def PharmeasySearchXpath(self):
-        return '//*[@id="__next"]/div[2]/div[2]/section[1]/div[1]/div/div/div[3]/div/div[2]/div[1]/div/input'
+        return '//*[@id="__next"]/main/div/div[2]/section[1]/div[1]/div/div/div[3]/div/div[2]/div/div/input'
 
     def PharmeasyProductXpath(self):
         return '//*[@id="content-container"]/div[1]/div[1]/div/div[1]/div/div/a'
@@ -26,7 +26,7 @@ class ObjectRepository:
         return 'Edd_eddDetails__2PyAJ'
 
     def pharmeasy_composition(self):
-        return 'MedicineMolecules_text__22hJW'
+        return 'DescriptionTable_value__1afug'
 
     def pharmeasy_price(self):
         return "PriceInfo_ourPrice__P1VR1"

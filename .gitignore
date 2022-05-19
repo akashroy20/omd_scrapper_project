@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+pharmeasy_test.py
+pincodeCheck.py

@@ -2,19 +2,11 @@ from flask import Flask, jsonify, request, render_template
 from RepositoryForObject import ObjectRepository
 from Scrapper import Scrapper
 from Pincode import Pincode
-from selenium import webdriver
-import os
 
 app = Flask(__name__)
 
 obj = ObjectRepository()
 driver_path = obj.getDriverPath()
-op = webdriver.ChromeOptions()
-op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-op.add_argument("--headless")
-op.add_argument("--no-sandbox")
-op.add_argument("--disable-dev-sh-usage")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=op)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -29,21 +21,19 @@ def search_result():
             required_product = request.form['requiredmedicine']
             delivery_pincode = request.form['pinc']
             pc = Pincode(delivery_pincode)
-            if pc.pincode_check():
+            if pc.pincode_check() and required_product != "":
                 valid_pincode = pc.corresponding_pincode()
+                dict1 = {"SearchedProduct": required_product, "Pincode": valid_pincode}
+                p = Scrapper(executable_path=driver_path)
+                pharmeasy = p.pharmeasy_result(product=required_product, pincode=pc.corresponding_pincode())
+                netmeds = p.netmeds_result(product=required_product, pincode=pc.corresponding_pincode())
+                dict1["pharmeasy"] = pharmeasy
+                dict1["netmeds"] = netmeds
+                return render_template('result.html', result=dict1)
             else:
-                valid_pincode = "Invalid pincode!!"
-            dict1 = {"SearchedProduct": required_product, "Pincode": valid_pincode}
-            p = Scrapper(executable_path=driver_path)
-            pharmeasy = p.pharmeasy_result(product=required_product, pincode=pc.corresponding_pincode())
-            dict1["pharmeasy"] = pharmeasy
-            netmed = p.netmeds_result(product=required_product, pincode=pc.corresponding_pincode())
-            dict1["netmeds"] = netmed
-            return render_template('result.html', result=dict1)
+                return render_template('invalid_input.html')
         except Exception as e:
-            print(e)
-    else:
-        return render_template('index.html')
+            raise Exception(str(e))
 
 
 @app.route('/via_postman', methods=['GET', 'POST'])
@@ -57,7 +47,7 @@ def via_postman():
             dict["Searched Product"] = required_product
             if pc.pincode_check():
                 dict["Pincode"] = pc.corresponding_pincode()
-                p = Scrapper(executable_path=driver)
+                p = Scrapper(executable_path=driver_path)
                 pharmeasy = p.pharmeasy_result(product=required_product, pincode=pc.corresponding_pincode())
                 netmeds = p.netmeds_result(product=required_product, pincode=pc.corresponding_pincode())
                 dict["pharmeasy"] = pharmeasy

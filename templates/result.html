@@ -14,56 +14,51 @@
 
 <body>
     <div class="table-users">
+        <br>
         <h1 style="text-align: center">Search Result</h1>
-        <nav class="navbar bg-light">
-          <div class="container">
-            <span class="navbar-text" style="background-color: #e3f2fd;">
-              <b>For Pincode:</b> {{result["Pincode"]}}
-            </span>
-          </div>
-        </nav>
-<table class="table table-striped" cellspacing="0" style="width:100%">
-        <thead>
-            <tr>
-                <th scope="col"><b>Website-found</b></th>
-                <th scope="col"><b>Product-Searched</b></th>
-                <th scope="col"><b>Product-Found</b></th>
-                <th scope="col"><b>Composition</b></th>
-                <th scope="col"><b>MRP</b></th>
-                <th scope="col"><b>Best-Price</b></th>
-                <th scope="col"><b>Estimated-delivery</b></th>
-                <th scope="col"><b>Expiry-Date</b></th>
-                <th scope="col"><b>Search-status</b></th>
-                <th scope="col"><b>Purchase-link</b></th>
-             </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Pharmeasy</td>
-                <td>{{result["SearchedProduct"]}}</td>
-                <td>{{result["pharmeasy"]["Product found"]}}</td>
-                <td>{{result["pharmeasy"]["Composition"]}}</td>
-                <td>{{result["pharmeasy"]["MRP"]}}</td>
-                <td>{{result["pharmeasy"]["Best-price"]}}</td>
-                <td>{{result["pharmeasy"]["Estimated_delivery_time"]}}</td>
-                <td>{{result["pharmeasy"]["Expiry"]}}</td>
-                <td>{{result["pharmeasy"]["Search status"]}}</td>
-                <td><a href='{{result["pharmeasy"]["purchase link"]}}'>Order Now</a></td>
-        </tbody>
-        <tbody>
+            <div class="alert alert-primary" role="alert">
+                <p><b>Searched product:</b> {{result["SearchedProduct"]}}</p>
+                <b>Pincode:</b> {{result["Pincode"]}}
+            </div>
+        <table class="table table-striped" cellspacing="0" style="width:100%">
+            <thead>
                 <tr>
-                    <td>Netmeds</td>
-                    <td>{{result["SearchedProduct"]}}</td>
-                    <td>{{result["netmeds"]["Product found"]}}</td>
-                    <td>{{result["netmeds"]["Composition"]}}</td>
-                    <td>{{result["netmeds"]["MRP"]}}</td>
-                    <td>{{result["netmeds"]["Best-price"]}}</td>
-                    <td>{{result["netmeds"]["Estimated_delivery_time"]}}</td>
-                    <td>{{result["netmeds"]["Expiry"]}}</td>
-                    <td>{{result["netmeds"]["Search status"]}}</td>
-                    <td><a href="{{result['netmeds']['purchase link']}}">Order Now</a></td>
+                    <th scope="col"><b>Website</b></th>
+                    <th scope="col"><b>Product-Found</b></th>
+                    <th scope="col"><b>Composition</b></th>
+                    <th scope="col"><b>MRP</b></th>
+                    <th scope="col"><b>Best-Price</b></th>
+                    <th scope="col"><b>Estimated-delivery</b></th>
+                    <th scope="col"><b>Expiry-Date</b></th>
+                    <th scope="col"><b>Search-status</b></th>
+                    <th scope="col"><b>Purchase-link</b></th>
+                 </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pharmeasy</td>
+                    <td>{{result["pharmeasy"]["Product found"]}}</td>
+                    <td>{{result["pharmeasy"]["Composition"]}}</td>
+                    <td>{{result["pharmeasy"]["MRP"]}}</td>
+                    <td>{{result["pharmeasy"]["Best-price"]}}</td>
+                    <td>{{result["pharmeasy"]["Estimated_delivery_time"]}}</td>
+                    <td>{{result["pharmeasy"]["Expiry"]}}</td>
+                    <td>{{result["pharmeasy"]["Search status"]}}</td>
+                    <td><a href='{{result["pharmeasy"]["purchase link"]}}'>Order Now</a></td>
             </tbody>
-      </table>
+            <tbody>
+                    <tr>
+                        <td>Netmeds</td>
+                        <td>{{result["netmeds"]["Product found"]}}</td>
+                        <td>{{result["netmeds"]["Composition"]}}</td>
+                        <td>{{result["netmeds"]["MRP"]}}</td>
+                        <td>{{result["netmeds"]["Best-price"]}}</td>
+                        <td>{{result["netmeds"]["Estimated_delivery_time"]}}</td>
+                        <td>{{result["netmeds"]["Expiry"]}}</td>
+                        <td>{{result["netmeds"]["Search status"]}}</td>
+                        <td><a href="{{result['netmeds']['purchase link']}}">Order Now</a></td>
+                </tbody>
+        </table>
     </div>
 </body>
 </html>
